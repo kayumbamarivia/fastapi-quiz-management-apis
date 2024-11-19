@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from routes.questions import router
-
+from routes.auth import router as auth_router
+from routes.questions import router as question_router
 
 app = FastAPI(
     title="My QUIZ FastAPI Application",
@@ -8,4 +8,5 @@ app = FastAPI(
     version="1.0.0" 
 )
 
-app.include_router(router)
+app.include_router(auth_router, prefix="/auth", tags=["Authentication"])
+app.include_router(question_router, tags=["Quiz Questions"])
